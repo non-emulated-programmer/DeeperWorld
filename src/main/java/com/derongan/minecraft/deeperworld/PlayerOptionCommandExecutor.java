@@ -8,16 +8,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class DeeperCommandExecutor implements CommandExecutor, TabCompleter {
+public class PlayerOptionCommandExecutor implements CommandExecutor, TabCompleter {
     private PlayerManager playerManager;
 
-    public DeeperCommandExecutor(PlayerManager playerManager) {
+    public PlayerOptionCommandExecutor(PlayerManager playerManager) {
         this.playerManager = playerManager;
     }
 

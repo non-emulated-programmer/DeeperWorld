@@ -3,8 +3,6 @@ package com.derongan.minecraft.deeperworld;
 import com.derongan.minecraft.deeperworld.player.PlayerManager;
 import com.derongan.minecraft.deeperworld.world.WorldManager;
 import com.derongan.minecraft.deeperworld.world.WorldManagerImpl;
-import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,10 +25,12 @@ public final class DeeperWorld extends JavaPlugin {
         movementListener = new MovementListener(playerManager);
         this.getServer().getPluginManager().registerEvents(movementListener, this);
 
-        DeeperCommandExecutor commandExecutor = new DeeperCommandExecutor(playerManager);
+        PlayerOptionCommandExecutor commandExecutor = new PlayerOptionCommandExecutor(playerManager);
+        ConfigCommandExecutor configExecutor = new ConfigCommandExecutor(worldManager);
 
         this.getCommand("sectionon").setExecutor(commandExecutor);
         this.getCommand("sectionoff").setExecutor(commandExecutor);
+        this.getCommand("listsections").setExecutor(configExecutor);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.derongan.minecraft.deeperworld.world.section;
 
 import com.derongan.minecraft.deeperworld.world.WorldManagerImpl;
+import org.bukkit.ChatColor;
 
 import java.util.Objects;
 
@@ -28,6 +29,11 @@ public abstract class AbstractSectionKey implements SectionKey {
     @Override
     public int hashCode() {
         return Objects.hash(key);
+    }
+
+    @Override
+    public String getName() {
+        return ChatColor.AQUA + key;
     }
 
     //TODO should this be in here?
