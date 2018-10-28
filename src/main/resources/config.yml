@@ -11,3 +11,4 @@
 #    region: [196, -92, 380, 92]
 #    world: TestWorld
 #    name: section1
+#    tick: 6000           # Time in ticks to fix this section at.

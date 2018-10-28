@@ -107,8 +107,8 @@ public class MovementListener implements Listener {
             }
         } else if (changeY < 0) {
             Section current = worldManager.getSectionFor(player.getLocation());
-            if (current != null) {
 
+            if (current != null) {
                 Section below = worldManager.getSectionFor(current.getKeyForSectionBelow());
 
                 if (below != null) {
@@ -148,5 +148,10 @@ public class MovementListener implements Listener {
         player.teleport(newLoc);
         player.setVelocity(oldVelocity);
 
+        if(newSection.getFixedTick().isPresent()) {
+            player.setPlayerTime(newSection.getFixedTick().get(), false);
+        } else {
+           player.resetPlayerTime();
+        }
     }
 }

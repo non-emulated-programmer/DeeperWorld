@@ -19,6 +19,7 @@ public class WorldManagerImpl implements WorldManager {
     public static final String WORLD_KEY = "world";
     public static final String REGION_KEY = "region";
     public static final String NAME_KEY = "name";
+    public static final String TICK_KEY = "tick";
 
     private Map<SectionKey, Section> sectionMap;
 
@@ -42,11 +43,14 @@ public class WorldManagerImpl implements WorldManager {
             Location refBottom = parseLocation((List<Integer>) map.get(REF_BOTTOM_KEY), world);
             Location refTop = parseLocation((List<Integer>) map.get(REF_TOP_KEY), world);
 
+            Number fixedTick = (Number)map.get(TICK_KEY);
+
             Section.Builder builder = Section.builder()
                     .setReferenceTop(refTop)
                     .setReferenceBottom(refBottom)
                     .setRegion(region)
                     .setWorld(world)
+                    .setFixedTick(fixedTick)
                     .setName(keys.get(i));
 
             if (i != 0)

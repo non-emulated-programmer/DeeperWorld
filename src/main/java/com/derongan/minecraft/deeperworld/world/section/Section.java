@@ -6,6 +6,8 @@ import org.apache.commons.lang.Validate;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import java.util.Optional;
+
 public class Section {
     private Location referenceTop;
     private Location referenceBottom;
@@ -16,6 +18,7 @@ public class Section {
     private SectionKey aboveKey;
     private SectionKey key;
     private SectionKey belowKey;
+    private Long fixedTick;
 
     private Section() {
     }
@@ -88,6 +91,14 @@ public class Section {
         return region;
     }
 
+    /**
+     * Gets the tick to fix time at for players in this section.
+     * @return The tick to fix time at.
+     */
+    public Optional<Long> getFixedTick(){
+        return Optional.ofNullable(fixedTick);
+    }
+
     @Override
     public String toString() {
         return key.toString();
@@ -107,6 +118,8 @@ public class Section {
         private SectionKey aboveKey = SectionKey.TERMINAL;
         private SectionKey key;
         private SectionKey belowKey = SectionKey.TERMINAL;
+
+        private Long fixedTick;
 
         public Builder setReferenceTop(Location referenceTop) {
             this.referenceTop = referenceTop;
@@ -158,6 +171,12 @@ public class Section {
             return this;
         }
 
+        public Builder setFixedTick(Number tick) {
+            if(tick != null)
+                this.fixedTick = tick.longValue();
+            return this;
+        }
+
         public Section build() {
             Section section = new Section();
 
@@ -171,6 +190,7 @@ public class Section {
             section.belowKey = belowKey;
             section.aboveKey = aboveKey;
             section.key = key;
+            section.fixedTick = fixedTick;
 
             return section;
         }
