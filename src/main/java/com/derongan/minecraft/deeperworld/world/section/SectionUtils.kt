@@ -5,6 +5,8 @@ package com.derongan.minecraft.deeperworld.world.section
 
 import com.derongan.minecraft.deeperworld.MinecraftConstants
 import com.derongan.minecraft.deeperworld.services.WorldManager
+import com.mineinabyss.idofront.operators.minus
+import com.mineinabyss.idofront.operators.plus
 import org.bukkit.Location
 import kotlin.math.max
 import kotlin.math.min
@@ -47,7 +49,7 @@ val Location.correspondingLocation: Location?
  * @return A new location that corresponds to the original location
  */
 fun Location.getCorrespondingLocation(sectionA: Section, sectionB: Section): Location? {
-    if(!sectionA.isAdjacentTo(sectionB)) return null
+    if (!sectionA.isAdjacentTo(sectionB)) return null
 
     // We decide which two points we are translating between.
     val (fromSectionLoc, toSectionLoc) = when (sectionA.isOnTopOf(sectionB)) {
@@ -57,8 +59,8 @@ fun Location.getCorrespondingLocation(sectionA: Section, sectionB: Section): Loc
 
     // fromX + n = toX
     // toX - fromX = n
-    val delta = toSectionLoc.toVector().subtract(fromSectionLoc.toVector())
-    val newLoc = clone().add(delta)
+    val delta = toSectionLoc.toVector() - (fromSectionLoc.toVector())
+    val newLoc = clone() + delta
     newLoc.world = sectionB.world
     return newLoc
 }
@@ -78,7 +80,7 @@ fun Location.sharedBetween(section: Section, otherSection: Section): Boolean {
 }
 
 fun Section.overlapWith(other: Section): Int? {
-    if(!isAdjacentTo(other)) return null
+    if (!isAdjacentTo(other)) return null
     // We decide which two points we are translating between.
     val (locA, locB) = when (isOnTopOf(other)) {
         true -> referenceBottom to other.referenceTop
